@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+
+    defaultConfig {
+        applicationId "com.fezrestia.android.cloudsyncclient"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    // Define APK name and replace.
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
+                // Rename APK.
+                output.outputFile = new File(
+                        "$project.buildDir/outputs/apk/${variant.name}/CloudSyncClient.apk")
+            } else {
+                // Replace.
+                output.outputFile = new File(
+                        "$project.buildDir/outputs/apk/${variant.name}/${output.outputFile.name}")
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
