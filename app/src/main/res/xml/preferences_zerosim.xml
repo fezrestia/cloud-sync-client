@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+>
+    <PreferenceCategory
+            android:title="0 SIM Stats"
+    >
+        <CheckBoxPreference
+            android:key="is_zerosim_cron_enabled"
+            android:title="Enable 0 SIM Cron"
+            android:summary="En/Disable 0 SIM cron job."
+        />
+    </PreferenceCategory>
+
+</PreferenceScreen>

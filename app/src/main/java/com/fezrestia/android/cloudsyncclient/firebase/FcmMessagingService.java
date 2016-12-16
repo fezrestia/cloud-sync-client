@@ -8,7 +8,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
     // Log tag.
     public static final String TAG = "FcmMessagingService";
     // Log flag.
-    public static final boolean IS_DEBUG = true || Log.IS_DEBUG;
+    public static final boolean IS_DEBUG = false || Log.IS_DEBUG;
 
     @Override
     public void onMessageReceived(RemoteMessage msg) {

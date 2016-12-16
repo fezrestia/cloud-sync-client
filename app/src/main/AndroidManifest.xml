@@ -21,6 +21,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".zerosim.ZeroSimSettingActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+
+
+
         <!-- Firebase -->
         <service
                 android:name=".firebase.FcmMessagingService"
