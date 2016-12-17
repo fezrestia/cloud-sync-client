@@ -1,5 +1,9 @@
 package com.fezrestia.android.cloudsyncclient.zerosim;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -12,6 +16,9 @@ public class ZeroSimSettingActivity extends PreferenceActivity {
     public static final String TAG = "ZeroSimSettingActivity";
     // Log flag.
     public static final boolean IS_DEBUG = false || Log.IS_DEBUG;
+
+    private static final int JOB_ID_NOTIFY = 100;
+    private static final int JOB_ID_SYNC = 200;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -31,6 +38,14 @@ public class ZeroSimSettingActivity extends PreferenceActivity {
 
         findPreference("is_zerosim_cron_enabled").setOnPreferenceChangeListener(
                 new ZeroSimEnabledChangeListener());
+
+// DEBUG
+//        JobScheduler scheduler = (JobScheduler)
+//                getSystemService(Context.JOB_SCHEDULER_SERVICE);
+//        List<JobInfo> infoList = scheduler.getAllPendingJobs();
+//        for (int i = 0; i < infoList.size(); ++i) {
+//            android.util.Log.e("TraceLog", "###### JobInfo = " + infoList.get(i).toString());
+//        }
 
         if (IS_DEBUG) Log.logDebug(TAG, "onResume() : X");
     }
@@ -63,12 +78,34 @@ public class ZeroSimSettingActivity extends PreferenceActivity {
             if (IS_DEBUG) Log.logDebug(TAG, "ZeroSimEnabledChangeListener.onPreferenceChange()");
 
             Boolean enabled = (Boolean) value;
-
             if (IS_DEBUG) Log.logDebug(TAG, "    Change to : " + enabled.booleanValue());
 
+            // Job sheduler service.
+            JobScheduler scheduler = (JobScheduler)
+                    getSystemService(Context.JOB_SCHEDULER_SERVICE);
 
-            //TODO: implements register/unregister job scheduler.
+            if (enabled.booleanValue()) {
+                // Enabled.
 
+                ComponentName serviceName = new ComponentName(
+                        ZeroSimSettingActivity.this.getApplicationContext().getPackageName(),
+                        ZeroSimJobSchedulerService.class.getName());
+
+                JobInfo notifyJobInfo = new JobInfo.Builder(JOB_ID_NOTIFY, serviceName)
+                        .setBackoffCriteria(60 * 1000, JobInfo.BACKOFF_POLICY_LINEAR) // 60 sec
+                        .setPeriodic(60 * 60 * 1000) // 60 min
+                        .setPersisted(true) // Auto register after reboot.
+                        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY) // All network.
+                        .setRequiresCharging(false) // Run always.
+                        .setRequiresDeviceIdle(false) // Run always.
+                        .build();
+                scheduler.schedule(notifyJobInfo);
+
+            } else {
+                // Disabled.
+
+                scheduler.cancel(JOB_ID_NOTIFY);
+            }
 
             return true;
         }
