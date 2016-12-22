@@ -94,7 +94,7 @@ public class ZeroSimSettingActivity extends PreferenceActivity {
                 JobInfo notifyJobInfo = getPeriodicJobInfo(
                         JOB_ID_NOTIFY,
                         serviceName,
-                        1 * 60 * 60 * 1000); // 1 hours
+                        2 * 60 * 60 * 1000); // 2 hours
 
                 JobInfo syncJobInfo = getPeriodicJobInfo(
                         JOB_ID_SYNC,

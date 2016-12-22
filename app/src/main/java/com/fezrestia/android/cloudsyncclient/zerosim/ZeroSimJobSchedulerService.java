@@ -2,7 +2,10 @@ package com.fezrestia.android.cloudsyncclient.zerosim;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 
+import com.fezrestia.android.cloudsyncclient.R;
 import com.fezrestia.android.util.log.Log;
 
 import java.io.BufferedReader;
@@ -24,6 +27,8 @@ public class ZeroSimJobSchedulerService extends JobService {
             = "https://cloud-sync-service.herokuapp.com/zero_sim_usages/api/notify";
     private static final String URL_SYNC
             = "https://cloud-sync-service.herokuapp.com/zero_sim_usages/api/sync";
+
+    private static final int NOTIFICATION_ERROR_ID = 1000;
 
     @Override
     public boolean onStartJob(JobParameters params) {
@@ -146,15 +151,29 @@ public class ZeroSimJobSchedulerService extends JobService {
 
         } catch(MalformedURLException e) {
             e.printStackTrace();
-            throw new RuntimeException("URL Malform Exception");
+            notification("JobScheduler ERROR", "MalformedURLException");
         } catch (ProtocolException e) {
             e.printStackTrace();
-            throw new RuntimeException("Protocol Exception");
+            notification("JobScheduler ERROR", "ProtocolException");
         } catch(IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("IOException");
+            notification("JobScheduler ERROR", "IOException");
         }
 
         return ret;
+    }
+
+    private void notification(String title, String text) {
+        NotificationCompat.Builder builder
+                = new NotificationCompat.Builder(getApplicationContext());
+
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setContentTitle(title);
+        builder.setContentText(text);
+
+        NotificationManagerCompat manager
+                = NotificationManagerCompat.from(getApplicationContext());
+
+        manager.notify(NOTIFICATION_ERROR_ID, builder.build());
     }
 }
