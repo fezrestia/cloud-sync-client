@@ -90,7 +90,9 @@ public class FcmMessagingService extends FirebaseMessagingService {
             ZeroSimWidgetProvider.updateWidget(getApplicationContext());
 
             // Notification.
-            notifyZeroSimStats(monthUsed);
+            if (MONTH_USED_MB_LIMIT <= monthUsed) {
+                notifyZeroSimStats(monthUsed);
+            }
 
             // Enable Wi-Fi AP.
             if (MONTH_USED_MB_LIMIT < monthUsed) {
