@@ -10,6 +10,8 @@ import android.support.v4.app.NotificationManagerCompat;
 
 import com.fezrestia.android.cloudsyncclient.R;
 import com.fezrestia.android.cloudsyncclient.RootApplication;
+import com.fezrestia.android.cloudsyncclient.zerosim.ZeroSimConstants;
+import com.fezrestia.android.cloudsyncclient.zerosim.ZeroSimWidgetProvider;
 import com.fezrestia.android.util.log.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -77,6 +79,15 @@ public class FcmMessagingService extends FirebaseMessagingService {
             int monthUsed = Integer.parseInt((String) data.get("month_used_current"));
 
             if (IS_DEBUG) Log.logDebug(TAG, "Month Used MB = " + monthUsed);
+
+            // Store.
+            RootApplication.getGlobalSharedPreferences(getApplicationContext()).edit().putInt(
+                    ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED,
+                    monthUsed)
+                    .apply();
+
+            // Update widget.
+            ZeroSimWidgetProvider.updateWidget(getApplicationContext());
 
             // Notification.
             notifyZeroSimStats(monthUsed);

@@ -62,6 +62,24 @@
                 android:permission="android.permission.BIND_JOB_SERVICE"
                 android:exported="true"
         />
+        <receiver
+                android:name=".zerosim.ZeroSimWidgetProvider"
+        >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/zerosim_widget"
+            />
+        </receiver>
+        <receiver
+                android:name=".zerosim.ZeroSimWidgetReceiver"
+        >
+            <intent-filter>
+                <action android:name="com.fezrestia.android.cloudsyncclient.zerosim.ACTION_ON_WIDGET_CLICKED" />
+            </intent-filter>
+        </receiver>
 
     </application>
 
