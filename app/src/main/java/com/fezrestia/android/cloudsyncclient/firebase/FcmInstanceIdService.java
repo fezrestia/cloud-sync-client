@@ -17,6 +17,7 @@ public class FcmInstanceIdService extends FirebaseInstanceIdService {
         if (IS_DEBUG) Log.logDebug(TAG, "onTokenRefresh() : Token=" + refreshedToken);
 
         //TODO: Send token to server.
+        Log.logError(TAG, "onTokenRefresh() : Token=" + refreshedToken);
 
     }
 
