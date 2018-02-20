@@ -82,7 +82,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
 
             // Store.
             RootApplication.getGlobalSharedPreferences(getApplicationContext()).edit().putInt(
-                    ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED,
+                    ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED_ZEROSIM,
                     monthUsed)
                     .apply();
 

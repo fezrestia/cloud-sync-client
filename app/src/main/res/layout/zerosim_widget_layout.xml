@@ -1,40 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/zerosim_widget_root"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="2dp"
+    android:id="@+id/zerosim_widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
 >
-
-    <TextView
-        android:id="@+id/zerosim_widget_title"
+    <!-- DoCoMo -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:text="0 SIM"
-        android:textAlignment="viewStart"
-    />
+        android:layout_weight="1"
+    >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+        >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="8sp"
+                android:text="DCM 4G LTE"
+                android:textAlignment="viewStart"
+                android:maxLines="1"
+            />
+            <TextView
+                android:id="@+id/zerosim_widget_docomo_used"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:text="xxx / 20 GB"
+                android:textAlignment="center"
+                android:maxLines="1"
+                android:background="@drawable/simple_frame"
+            />
+        </LinearLayout>
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/zerosim_widget_month_used"
+    <!-- Nuromobile -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:textAlignment="viewStart"
-    />
+        android:layout_weight="1"
+    >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+        >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="8sp"
+                android:text="NUROMOBILE"
+                android:textAlignment="viewStart"
+                android:maxLines="1"
+            />
+            <TextView
+                android:id="@+id/zerosim_widget_nuro_used"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:text="xxx / 2000 MB"
+                android:textAlignment="center"
+                android:maxLines="1"
+                android:background="@drawable/simple_frame"
+            />
+        </LinearLayout>
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/zerosim_widget_month_footer"
+    <!-- Zero SIM -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:text="/Month"
-        android:textAlignment="viewStart"
-    />
-
+        android:layout_weight="1"
+    >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+        >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="8sp"
+                android:text="ZERO SIM"
+                android:textAlignment="viewStart"
+                android:maxLines="1"
+            />
+            <TextView
+                android:id="@+id/zerosim_widget_zerosim_used"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:text="xxx / 500 MB"
+                android:textAlignment="center"
+                android:maxLines="1"
+                android:background="@drawable/simple_frame"
+            />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

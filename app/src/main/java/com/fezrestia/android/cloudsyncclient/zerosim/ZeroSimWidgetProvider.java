@@ -45,18 +45,23 @@ public class ZeroSimWidgetProvider extends AppWidgetProvider {
                 R.layout.zerosim_widget_layout);
 
         // Get current value.
-        int curUsed = RootApplication.getGlobalSharedPreferences(context).getInt(
-                ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED,
+        int curUsedZeroSim = RootApplication.getGlobalSharedPreferences(context).getInt(
+                ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED_ZEROSIM,
+                -1); // Default value.
+        int curUsedNuro = RootApplication.getGlobalSharedPreferences(context).getInt(
+                ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED_NURO,
+                -1); // Default value.
+        int curUsedDocomo = RootApplication.getGlobalSharedPreferences(context).getInt(
+                ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED_DOCOMO,
                 -1); // Default value.
 
         // Text.
-        String text = "";
-        if (curUsed != -1) {
-            text = text + curUsed + "MB";
-        } else {
-            text = "NO DATA";
-        }
-        remoteViews.setTextViewText(R.id.zerosim_widget_month_used, text);
+        String zerosim_text = getDataString(curUsedZeroSim);
+        String nuro_text = getDataString(curUsedNuro);
+        String docomo_text = getDataString(curUsedDocomo);
+        remoteViews.setTextViewText(R.id.zerosim_widget_zerosim_used, zerosim_text);
+        remoteViews.setTextViewText(R.id.zerosim_widget_nuro_used, nuro_text);
+        remoteViews.setTextViewText(R.id.zerosim_widget_docomo_used, docomo_text);
 
         // Click event.
         remoteViews.setOnClickPendingIntent(
@@ -68,6 +73,16 @@ public class ZeroSimWidgetProvider extends AppWidgetProvider {
         AppWidgetManager.getInstance(context).updateAppWidget(widget, remoteViews);
 
         if (IS_DEBUG) Log.logDebug(TAG, "updateWidget() : X");
+    }
+
+    private static String getDataString(int curUsed) {
+        String text = "";
+        if (curUsed != -1) {
+            text = text + curUsed + "MB";
+        } else {
+            text = "NO DATA";
+        }
+        return text;
     }
 
     public static PendingIntent getWidgetClickCallback(Context context) {
