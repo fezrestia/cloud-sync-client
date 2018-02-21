@@ -12,4 +12,14 @@ public class ZeroSimConstants {
     public static final String SP_KEY_CURRENT_MONTH_USED_DOCOMO
             = "key-zerosim-current-month-used-docomo";
 
+    public static final int INVALID_USED_AMOUNT = -1;
+
+    public static final int MONTH_USED_MB_LIMIT_ZEROSIM = 5000;
+    public static final int MONTH_USED_MB_LIMIT_NURO = 2000;
+    public static final int MONTH_USED_MB_LIMIT_DOCOMO = 20000;
+
+    public static final int MONTH_USED_MB_CLEARANCE = 50;
+
+    public static final int MONTH_USED_MB_WARNING_ZEROSIM =
+            MONTH_USED_MB_LIMIT_ZEROSIM - MONTH_USED_MB_CLEARANCE;
 }

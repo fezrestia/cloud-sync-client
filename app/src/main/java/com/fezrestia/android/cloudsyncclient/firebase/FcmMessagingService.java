@@ -54,9 +54,6 @@ public class FcmMessagingService extends FirebaseMessagingService {
 
     //// ZERO SIM STATS ///////////////////////////////////////////////////////////////////////////
 
-    // Limit month used.
-    private static final int MONTH_USED_MB_LIMIT = 450;
-
     // Notification ID.
     private static final int ZERO_SIM_NOTIFICATION_ID = 1000;
     private static final int WIFI_AP_ON_NOTIFICATION_ID = 1001;
@@ -74,33 +71,50 @@ public class FcmMessagingService extends FirebaseMessagingService {
         }
 
         // Check month used limit.
-        if (msg.getData().size() > 0) {
-            Map data = msg.getData();
-            int monthUsed = Integer.parseInt((String) data.get("month_used_current"));
+        int zerosimUsed = storeRemoteToLocal(
+                msg,
+                "zerosim_month_used_current_mb",
+                ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED_ZEROSIM);
+        storeRemoteToLocal(
+                msg,
+                "nuro_month_used_current_mb",
+                ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED_NURO);
+        storeRemoteToLocal(
+                msg,
+                "docomo_month_used_current_mb",
+                ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED_DOCOMO);
 
-            if (IS_DEBUG) Log.logDebug(TAG, "Month Used MB = " + monthUsed);
+        // Update widget.
+        ZeroSimWidgetProvider.updateWidget(getApplicationContext());
 
-            // Store.
-            RootApplication.getGlobalSharedPreferences(getApplicationContext()).edit().putInt(
-                    ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED_ZEROSIM,
-                    monthUsed)
-                    .apply();
+        // Check limit over.
+        if (ZeroSimConstants.MONTH_USED_MB_WARNING_ZEROSIM <= zerosimUsed) {
+            notifyZeroSimStats(zerosimUsed);
 
-            // Update widget.
-            ZeroSimWidgetProvider.updateWidget(getApplicationContext());
-
-            // Notification.
-            if (MONTH_USED_MB_LIMIT <= monthUsed) {
-                notifyZeroSimStats(monthUsed);
-            }
-
-            // Enable Wi-Fi AP.
-            if (MONTH_USED_MB_LIMIT < monthUsed) {
-                if (IS_DEBUG) Log.logDebug(TAG, "Force turn on WiFI AP.");
-                enableWiFiAp();
-                notifyWiFiApOn();
-            }
+            if (IS_DEBUG) Log.logDebug(TAG, "Force turn on WiFI AP.");
+            enableWiFiAp();
+            notifyWiFiApOn();
         }
+    }
+
+    private int storeRemoteToLocal(RemoteMessage remoteMsg, String remoteKey, String localKey) {
+        Map<String, String> data = remoteMsg.getData();
+
+        String remoteVal = data.get(remoteKey);
+        int localVal;
+        if (remoteVal == null) {
+            localVal = ZeroSimConstants.INVALID_USED_AMOUNT;
+        } else {
+            localVal = Integer.parseInt(remoteVal);
+        }
+        // Store.
+        RootApplication.getGlobalSharedPreferences(getApplicationContext()).edit().putInt(
+                localKey,
+                localVal)
+                .apply();
+
+        if (IS_DEBUG) Log.logDebug(TAG, "key=" + localKey + " = " + localVal);
+        return localVal;
     }
 
     // Add notification.
