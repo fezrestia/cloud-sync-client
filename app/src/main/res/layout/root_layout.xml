@@ -10,7 +10,13 @@
         android:id="@+id/start_zerosim_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0 SIM Setting"
+        android:text="SIM Load Stats Setting"
+    />
+    <Button
+        android:id="@+id/update_sim_load_stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update SIM Load Stats"
     />
 
 

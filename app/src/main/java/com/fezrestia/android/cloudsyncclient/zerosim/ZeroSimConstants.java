@@ -22,4 +22,8 @@ public class ZeroSimConstants {
 
     public static final int MONTH_USED_MB_WARNING_ZEROSIM =
             MONTH_USED_MB_LIMIT_ZEROSIM - MONTH_USED_MB_CLEARANCE;
+
+    // Notify API.
+    public static final String SIM_STATS_NOTIFY_GET_URL =
+            "https://cloud-sync-service.herokuapp.com/zero_sim_usages/api/notify";
 }
