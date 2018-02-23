@@ -32,17 +32,6 @@ public class ZeroSimFcmCallback implements FcmMessagingService.Callback {
 
     @Override
     public void handleMessage(RemoteMessage msg) {
-        if (IS_DEBUG) {
-            Log.logDebug(TAG, "    Msg From = " + msg.getFrom());
-            if (msg.getData().size() > 0) {
-                Log.logDebug(TAG, "    Data = " + msg.getData());
-            }
-            if (msg.getNotification() != null) {
-                Log.logDebug(TAG, "    Msg Title = " + msg.getNotification().getTitle());
-                Log.logDebug(TAG, "    Msg Body = " + msg.getNotification().getBody());
-            }
-        }
-
         // Check month used limit.
         int zerosimUsed = storeRemoteToLocal(
                 msg,

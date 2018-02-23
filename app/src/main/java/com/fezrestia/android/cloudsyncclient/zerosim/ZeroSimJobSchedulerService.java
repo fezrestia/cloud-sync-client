@@ -19,12 +19,8 @@ public class ZeroSimJobSchedulerService extends JobService {
     // Log tag.
     public static final String TAG = "ZeroSimJobSchedulerService";
     // Log flag.
+    @SuppressWarnings("PointlessBooleanExpression")
     public static final boolean IS_DEBUG = false || Log.IS_DEBUG;
-
-    private static final String URL_NOTIFY
-            = "https://cloud-sync-service.herokuapp.com/zero_sim_usages/api/notify";
-    private static final String URL_SYNC
-            = "https://cloud-sync-service.herokuapp.com/zero_sim_usages/api/sync";
 
     @Override
     public boolean onStartJob(JobParameters params) {
@@ -78,7 +74,8 @@ public class ZeroSimJobSchedulerService extends JobService {
         public void run() {
             if (IS_DEBUG) Log.logDebug(TAG, "NotifyThread.run() : E");
 
-            submitGetRequest(URL_NOTIFY);
+            String response = submitGetRequest(ZeroSimConstants.SIM_STATS_NOTIFY_GET_URL);
+            if (IS_DEBUG) Log.logDebug(TAG, "response = " + response);
 
             jobFinished(mParams, false); // Not reschedule.
 
@@ -100,7 +97,8 @@ public class ZeroSimJobSchedulerService extends JobService {
         public void run() {
             if (IS_DEBUG) Log.logDebug(TAG, "SyncThread.run() : E");
 
-            submitGetRequest(URL_SYNC);
+            String response = submitGetRequest(ZeroSimConstants.SIM_STATS_SYNC_GET_URL);
+            if (IS_DEBUG) Log.logDebug(TAG, "response = " + response);
 
             jobFinished(mParams, false); // Not reschedule.
 

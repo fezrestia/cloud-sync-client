@@ -16,6 +16,7 @@ public class RootActivity extends Activity {
     // Log tag.
     public static final String TAG = "RootActivity";
     // Log flag.
+    @SuppressWarnings("PointlessBooleanExpression")
     public static final boolean IS_DEBUG = false || Log.IS_DEBUG;
 
     @Override
@@ -25,10 +26,13 @@ public class RootActivity extends Activity {
 
         setContentView(R.layout.root_layout);
 
-        Button zerosim = (Button) findViewById(R.id.start_zerosim_activity);
+        Button zerosim = findViewById(R.id.start_zerosim_activity);
         zerosim.setOnClickListener(new ZeroSimButtonOnClickListener());
 
-        Button updateSimStats = (Button) findViewById(R.id.update_sim_load_stats);
+        Button syncSimStats = findViewById(R.id.sync_request_on_server);
+        syncSimStats.setOnClickListener(new SyncSimStatsButtonOnClickListener());
+
+        Button updateSimStats = findViewById(R.id.update_sim_load_stats);
         updateSimStats.setOnClickListener(new UpdateSimStatsButtonOnClickListener());
 
         if (IS_DEBUG) Log.logDebug(TAG, "onCreate() : X");
@@ -68,6 +72,16 @@ public class RootActivity extends Activity {
                     RootActivity.this.getApplicationContext().getPackageName(),
                     ZeroSimSettingActivity.class.getName());
             startActivity(intent);
+        }
+    }
+
+    private class SyncSimStatsButtonOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Intent browser = new Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(ZeroSimConstants.SIM_STATS_SYNC_GET_URL));
+            startActivity(browser);
         }
     }
 

@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.provider.DocumentsContract;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
@@ -21,7 +20,7 @@ public class RootApplication extends Application {
     public static final boolean IS_DEBUG = false || Log.IS_DEBUG;
 
     // Application context.
-    private static Context mContext = null;
+    private static Context mAppContext = null;
 
     // Notification ID.
     private static final int NOTIFICATION_ERROR_ID = 1000;
@@ -38,7 +37,7 @@ public class RootApplication extends Application {
      * @return Context.
      */
     public static Context getContext() {
-        return mContext;
+        return mAppContext;
     }
 
     @Override
@@ -46,7 +45,7 @@ public class RootApplication extends Application {
         if (IS_DEBUG) Log.logDebug(TAG, "onCreate() : E");
         super.onCreate();
 
-        mContext = this;
+        mAppContext = this;
 
         // SharedPreferences.
         setupSharedPreferences(this);
@@ -86,8 +85,8 @@ public class RootApplication extends Application {
     /**
      * Get global SharedPreference instance.
      *
-     * @param context
-     * @return
+     * @param context Context
+     * @return SharedPrefereces
      */
     public static SharedPreferences getGlobalSharedPreferences(Context context) {
         if (mGlobalSharedPreferences == null) {

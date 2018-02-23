@@ -38,9 +38,19 @@ public class FcmMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage msg) {
         if (IS_DEBUG) Log.logDebug(TAG, "onMessageReceived() : E");
 
+        if (IS_DEBUG) {
+            Log.logDebug(TAG, "    Msg From = " + msg.getFrom());
+            if (msg.getData().size() > 0) {
+                Log.logDebug(TAG, "    Data = " + msg.getData());
+            }
+            if (msg.getNotification() != null) {
+                Log.logDebug(TAG, "    Msg Title = " + msg.getNotification().getTitle());
+                Log.logDebug(TAG, "    Msg Body = " + msg.getNotification().getBody());
+            }
+        }
+
         // Check app mode.
         String appMode = msg.getData().get("app");
-
         if (appMode == null) {
             // Unexpected.
             if (IS_DEBUG) Log.logError(TAG, "Received Msg is NULL app mode. Unexpected.");
@@ -50,7 +60,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
                 callback.handleMessage(msg);
             } else {
                 // Unexpected.
-                if (IS_DEBUG) Log.logError(TAG, "Received app mode is unexpected.");
+                if (IS_DEBUG) Log.logError(TAG, "Received app mode is unexpected : " + appMode);
             }
         }
 
