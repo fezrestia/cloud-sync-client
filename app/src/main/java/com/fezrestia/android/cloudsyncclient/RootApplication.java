@@ -8,6 +8,9 @@ import android.provider.DocumentsContract;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
+import com.fezrestia.android.cloudsyncclient.firebase.FcmMessagingService;
+import com.fezrestia.android.cloudsyncclient.zerosim.ZeroSimConstants;
+import com.fezrestia.android.cloudsyncclient.zerosim.ZeroSimFcmCallback;
 import com.fezrestia.android.util.log.Log;
 
 public class RootApplication extends Application {
@@ -16,6 +19,9 @@ public class RootApplication extends Application {
     // Log flag.
     @SuppressWarnings("PointlessBooleanExpression")
     public static final boolean IS_DEBUG = false || Log.IS_DEBUG;
+
+    // Application context.
+    private static Context mContext = null;
 
     // Notification ID.
     private static final int NOTIFICATION_ERROR_ID = 1000;
@@ -26,13 +32,27 @@ public class RootApplication extends Application {
     private static final String KEY_SHARED_PREFERENCES_VERSION = "key-version";
     private static final int VAL_SHARED_PREFERENCES_VERSION = 1;
 
+    /**
+     * Get application context from anywhere.
+     *
+     * @return Context.
+     */
+    public static Context getContext() {
+        return mContext;
+    }
+
     @Override
     public void onCreate() {
         if (IS_DEBUG) Log.logDebug(TAG, "onCreate() : E");
         super.onCreate();
 
+        mContext = this;
+
         // SharedPreferences.
         setupSharedPreferences(this);
+
+        // Firebase.
+        setupFcmCallbacks();
 
         if (IS_DEBUG) Log.logDebug(TAG, "onCreate() : X");
     }
@@ -92,5 +112,12 @@ public class RootApplication extends Application {
         NotificationManagerCompat manager = NotificationManagerCompat.from(context);
 
         manager.notify(NOTIFICATION_ERROR_ID, builder.build());
+    }
+
+    private void setupFcmCallbacks() {
+        FcmMessagingService.registerCallback(
+                ZeroSimConstants.SIM_STATS_FCM_CALLBACK_REG_KEY,
+                new ZeroSimFcmCallback());
+
     }
 }

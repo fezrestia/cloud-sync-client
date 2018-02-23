@@ -26,4 +26,8 @@ public class ZeroSimConstants {
     // Notify API.
     public static final String SIM_STATS_NOTIFY_GET_URL =
             "https://cloud-sync-service.herokuapp.com/zero_sim_usages/api/notify";
+
+    // FCM message callback register key.
+    public static final String SIM_STATS_FCM_CALLBACK_REG_KEY = "zero-sim-stats";
+
 }
