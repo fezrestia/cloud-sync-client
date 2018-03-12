@@ -8,8 +8,8 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
 import com.fezrestia.android.cloudsyncclient.firebase.FcmMessagingService;
-import com.fezrestia.android.cloudsyncclient.zerosim.ZeroSimConstants;
-import com.fezrestia.android.cloudsyncclient.zerosim.ZeroSimFcmCallback;
+import com.fezrestia.android.cloudsyncclient.simstats.SimStatsConstants;
+import com.fezrestia.android.cloudsyncclient.simstats.SimStatsFcmCallback;
 import com.fezrestia.android.util.log.Log;
 
 public class RootApplication extends Application {
@@ -29,7 +29,7 @@ public class RootApplication extends Application {
     private static SharedPreferences mGlobalSharedPreferences = null;
     // SharedPreferences version.
     private static final String KEY_SHARED_PREFERENCES_VERSION = "key-version";
-    private static final int VAL_SHARED_PREFERENCES_VERSION = 1;
+    private static final int VAL_SHARED_PREFERENCES_VERSION = 2;
 
     /**
      * Get application context from anywhere.
@@ -58,13 +58,13 @@ public class RootApplication extends Application {
 
     @Override
     public void onTerminate() {
-        if (IS_DEBUG) Log.logDebug(TAG, "onTerminat() : E");
+        if (IS_DEBUG) Log.logDebug(TAG, "onTerminate() : E");
 
         // Release.
         mGlobalSharedPreferences = null;
 
         super.onTerminate();
-        if (IS_DEBUG) Log.logDebug(TAG, "onTerminat() : X");
+        if (IS_DEBUG) Log.logDebug(TAG, "onTerminate() : X");
     }
 
     private static void setupSharedPreferences(Context context) {
@@ -86,7 +86,7 @@ public class RootApplication extends Application {
      * Get global SharedPreference instance.
      *
      * @param context Context
-     * @return SharedPrefereces
+     * @return SharedPreferences
      */
     public static SharedPreferences getGlobalSharedPreferences(Context context) {
         if (mGlobalSharedPreferences == null) {
@@ -115,8 +115,8 @@ public class RootApplication extends Application {
 
     private void setupFcmCallbacks() {
         FcmMessagingService.registerCallback(
-                ZeroSimConstants.SIM_STATS_FCM_CALLBACK_REG_KEY,
-                new ZeroSimFcmCallback());
+                SimStatsConstants.SIM_STATS_FCM_CALLBACK_REG_KEY,
+                new SimStatsFcmCallback());
 
     }
 }

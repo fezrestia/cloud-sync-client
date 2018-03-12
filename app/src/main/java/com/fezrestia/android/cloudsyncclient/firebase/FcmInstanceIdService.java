@@ -1,6 +1,5 @@
 package com.fezrestia.android.cloudsyncclient.firebase;
 
-import com.fezrestia.android.cloudsyncclient.zerosim.ZeroSimConstants;
 import com.fezrestia.android.util.log.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;

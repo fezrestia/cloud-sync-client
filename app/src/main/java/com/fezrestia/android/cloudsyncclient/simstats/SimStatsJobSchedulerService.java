@@ -1,4 +1,4 @@
-package com.fezrestia.android.cloudsyncclient.zerosim;
+package com.fezrestia.android.cloudsyncclient.simstats;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
@@ -15,9 +15,9 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-public class ZeroSimJobSchedulerService extends JobService {
+public class SimStatsJobSchedulerService extends JobService {
     // Log tag.
-    public static final String TAG = "ZeroSimJobSchedulerService";
+    public static final String TAG = "SimStatsJobSchedulerService";
     // Log flag.
     @SuppressWarnings("PointlessBooleanExpression")
     public static final boolean IS_DEBUG = false || Log.IS_DEBUG;
@@ -27,14 +27,14 @@ public class ZeroSimJobSchedulerService extends JobService {
         if (IS_DEBUG) Log.logDebug(TAG, "onStartJob() : E");
 
         switch(params.getJobId()) {
-            case ZeroSimSettingActivity.JOB_ID_NOTIFY:
+            case SimStatsSettingActivity.JOB_ID_NOTIFY:
                 Thread notifyThread = new NotifyThread(params);
                 notifyThread.setName(TAG + "-NotifyThread");
                 notifyThread.setPriority(Thread.MIN_PRIORITY);
                 notifyThread.start();
                 break;
 
-            case ZeroSimSettingActivity.JOB_ID_SYNC:
+            case SimStatsSettingActivity.JOB_ID_SYNC:
                 Thread syncThread = new SyncThread(params);
                 syncThread.setName(TAG + "-SyncThread");
                 syncThread.setPriority(Thread.MIN_PRIORITY);
@@ -74,7 +74,7 @@ public class ZeroSimJobSchedulerService extends JobService {
         public void run() {
             if (IS_DEBUG) Log.logDebug(TAG, "NotifyThread.run() : E");
 
-            String response = submitGetRequest(ZeroSimConstants.SIM_STATS_NOTIFY_GET_URL);
+            String response = submitGetRequest(SimStatsConstants.SIM_STATS_NOTIFY_GET_URL_ZEROSIM);
             if (IS_DEBUG) Log.logDebug(TAG, "response = " + response);
 
             jobFinished(mParams, false); // Not reschedule.
@@ -97,7 +97,7 @@ public class ZeroSimJobSchedulerService extends JobService {
         public void run() {
             if (IS_DEBUG) Log.logDebug(TAG, "SyncThread.run() : E");
 
-            String response = submitGetRequest(ZeroSimConstants.SIM_STATS_SYNC_GET_URL);
+            String response = submitGetRequest(SimStatsConstants.SIM_STATS_SYNC_GET_URL_ZEROSIM);
             if (IS_DEBUG) Log.logDebug(TAG, "response = " + response);
 
             jobFinished(mParams, false); // Not reschedule.

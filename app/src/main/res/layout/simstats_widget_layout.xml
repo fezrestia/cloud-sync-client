@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/zerosim_widget_root"
+    android:id="@+id/simstats_widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
 >
-    <!-- DoCoMo -->
+    <!-- DCM -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
                 android:maxLines="1"
             />
             <TextView
-                android:id="@+id/zerosim_widget_docomo_used"
+                android:id="@+id/simstats_widget_dcm_used"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
@@ -62,7 +62,7 @@
                 android:maxLines="1"
             />
             <TextView
-                android:id="@+id/zerosim_widget_nuro_used"
+                android:id="@+id/simstats_widget_nuro_used"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
@@ -97,7 +97,7 @@
                 android:maxLines="1"
             />
             <TextView
-                android:id="@+id/zerosim_widget_zerosim_used"
+                android:id="@+id/simstats_widget_zerosim_used"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"

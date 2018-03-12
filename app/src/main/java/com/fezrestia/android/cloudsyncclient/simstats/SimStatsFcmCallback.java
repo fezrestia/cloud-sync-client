@@ -1,4 +1,4 @@
-package com.fezrestia.android.cloudsyncclient.zerosim;
+package com.fezrestia.android.cloudsyncclient.simstats;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -18,9 +18,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-public class ZeroSimFcmCallback implements FcmMessagingService.Callback {
+public class SimStatsFcmCallback implements FcmMessagingService.Callback {
     // Log tag.
-    private static final String TAG = "ZeroSimFcmCallback";
+    private static final String TAG = "SimStatsFcmCallback";
 
     // Log flag.
     @SuppressWarnings("PointlessBooleanExpression")
@@ -33,24 +33,24 @@ public class ZeroSimFcmCallback implements FcmMessagingService.Callback {
     @Override
     public void handleMessage(RemoteMessage msg) {
         // Check month used limit.
-        int zerosimUsed = storeRemoteToLocal(
+        float zerosimUsed = storeRemoteToLocal(
                 msg,
-                "zerosim_month_used_current_mb",
-                ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED_ZEROSIM);
+                SimStatsConstants.KEY_SIM_STATS_MONTH_USED_MB_NOTIFY_ZEROSIM,
+                SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_ZEROSIM);
         storeRemoteToLocal(
                 msg,
-                "nuro_month_used_current_mb",
-                ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED_NURO);
+                SimStatsConstants.KEY_SIM_STATS_MONTH_USED_MB_NOTIFY_NURO,
+                SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_NURO);
         storeRemoteToLocal(
                 msg,
-                "docomo_month_used_current_mb",
-                ZeroSimConstants.SP_KEY_CURRENT_MONTH_USED_DOCOMO);
+                SimStatsConstants.KEY_SIM_STATS_MONTH_USED_MB_NOTIFY_DCM,
+                SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_DCM);
 
         // Update widget.
-        ZeroSimWidgetProvider.updateWidget(RootApplication.getContext());
+        SimStatsWidgetProvider.updateWidget(RootApplication.getContext());
 
         // Check limit over.
-        if (ZeroSimConstants.MONTH_USED_MB_WARNING_ZEROSIM <= zerosimUsed) {
+        if (SimStatsConstants.MONTH_USED_MB_WARNING_ZEROSIM <= zerosimUsed) {
             notifyZeroSimStats(zerosimUsed);
 
             if (IS_DEBUG) Log.logDebug(TAG, "Force turn on WiFI AP.");
@@ -59,33 +59,33 @@ public class ZeroSimFcmCallback implements FcmMessagingService.Callback {
         }
     }
 
-    private int storeRemoteToLocal(RemoteMessage remoteMsg, String remoteKey, String localKey) {
+    private float storeRemoteToLocal(RemoteMessage remoteMsg, String remoteKey, String localKey) {
         Map<String, String> data = remoteMsg.getData();
 
         String remoteVal = data.get(remoteKey);
-        int localVal;
-        if (remoteVal == null) {
-            localVal = ZeroSimConstants.INVALID_USED_AMOUNT;
-        } else {
-            localVal = Integer.parseInt(remoteVal);
-        }
-        // Store.
-        RootApplication.getGlobalSharedPreferences(RootApplication.getContext()).edit().putInt(
-                localKey,
-                localVal)
-                .apply();
+        float localVal = SimStatsConstants.INVALID_USED_AMOUNT;
+        if (remoteVal != null) {
+            localVal = Float.parseFloat(remoteVal);
 
-        if (IS_DEBUG) Log.logDebug(TAG, "key=" + localKey + " = " + localVal);
+            // Store.
+            RootApplication.getGlobalSharedPreferences(RootApplication.getContext()).edit().putFloat(
+                    localKey,
+                    localVal)
+                    .apply();
+
+            if (IS_DEBUG) Log.logDebug(TAG, "key=" + localKey + " = " + localVal);
+        }
+
         return localVal;
     }
 
     // Add notification.
-    private void notifyZeroSimStats(int curMonthUsedMb) {
+    private void notifyZeroSimStats(float curMonthUsedMb) {
         NotificationCompat.Builder builder
                 = new NotificationCompat.Builder(RootApplication.getContext());
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentTitle("Zero SIM Stats");
-        builder.setContentText("Month Used : " + curMonthUsedMb + " MB");
+        builder.setContentText("Month Used : " + ((int) curMonthUsedMb) + " MB");
 
         NotificationManagerCompat manager
                 = NotificationManagerCompat.from(RootApplication.getContext());

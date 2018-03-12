@@ -4,12 +4,12 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
 >
     <PreferenceCategory
-            android:title="0 SIM Stats"
+            android:title="SIM Stats"
     >
         <CheckBoxPreference
-            android:key="is_zerosim_cron_enabled"
-            android:title="Enable 0 SIM Cron"
-            android:summary="En/Disable 0 SIM cron job."
+            android:key="is_simstats_cron_enabled"
+            android:title="Enable SIM Stats Cron"
+            android:summary="En/Disable SIM stats cron job."
         />
     </PreferenceCategory>
 

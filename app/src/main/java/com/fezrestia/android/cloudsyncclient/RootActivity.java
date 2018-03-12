@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.fezrestia.android.cloudsyncclient.zerosim.ZeroSimConstants;
-import com.fezrestia.android.cloudsyncclient.zerosim.ZeroSimSettingActivity;
+import com.fezrestia.android.cloudsyncclient.simstats.SimStatsConstants;
+import com.fezrestia.android.cloudsyncclient.simstats.SimStatsSettingActivity;
 import com.fezrestia.android.util.log.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -26,8 +26,8 @@ public class RootActivity extends Activity {
 
         setContentView(R.layout.root_layout);
 
-        Button zerosim = findViewById(R.id.start_zerosim_activity);
-        zerosim.setOnClickListener(new ZeroSimButtonOnClickListener());
+        Button simstats = findViewById(R.id.start_simstats_activity);
+        simstats.setOnClickListener(new SimStatsButtonOnClickListener());
 
         Button syncSimStats = findViewById(R.id.sync_request_on_server);
         syncSimStats.setOnClickListener(new SyncSimStatsButtonOnClickListener());
@@ -64,13 +64,13 @@ public class RootActivity extends Activity {
         if (IS_DEBUG) Log.logDebug(TAG, "onDestroy() : X");
     }
 
-    private class ZeroSimButtonOnClickListener implements View.OnClickListener {
+    private class SimStatsButtonOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent();
             intent.setClassName(
                     RootActivity.this.getApplicationContext().getPackageName(),
-                    ZeroSimSettingActivity.class.getName());
+                    SimStatsSettingActivity.class.getName());
             startActivity(intent);
         }
     }
@@ -80,7 +80,7 @@ public class RootActivity extends Activity {
         public void onClick(View v) {
             Intent browser = new Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse(ZeroSimConstants.SIM_STATS_SYNC_GET_URL));
+                    Uri.parse(SimStatsConstants.SIM_STATS_SYNC_GET_URL_ZEROSIM));
             startActivity(browser);
         }
     }
@@ -90,7 +90,7 @@ public class RootActivity extends Activity {
         public void onClick(View v) {
             Intent browser = new Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse(ZeroSimConstants.SIM_STATS_NOTIFY_GET_URL));
+                    Uri.parse(SimStatsConstants.SIM_STATS_NOTIFY_GET_URL_ZEROSIM));
             startActivity(browser);
         }
     }

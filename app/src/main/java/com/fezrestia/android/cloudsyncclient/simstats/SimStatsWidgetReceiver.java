@@ -1,18 +1,17 @@
-package com.fezrestia.android.cloudsyncclient.zerosim;
+package com.fezrestia.android.cloudsyncclient.simstats;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.fezrestia.android.cloudsyncclient.RootApplication;
 import com.fezrestia.android.util.log.Log;
 
 /**
- * WidgetProvider for Zero SIM Widget.
+ * WidgetProvider for SIM stats widget.
  */
-public class ZeroSimWidgetReceiver extends BroadcastReceiver {
+public class SimStatsWidgetReceiver extends BroadcastReceiver {
     // Log tag.
-    public static final String TAG = "ZeroSimWidgetReceiver";
+    public static final String TAG = "SimStatsWidgetReceiver";
     // Log flag.
     @SuppressWarnings("PointlessBooleanExpression")
     public static final boolean IS_DEBUG = false || Log.IS_DEBUG;
@@ -25,9 +24,9 @@ public class ZeroSimWidgetReceiver extends BroadcastReceiver {
         if (IS_DEBUG) Log.logDebug(TAG, "    ACTION = " + action);
 
         switch (action) {
-            case ZeroSimConstants.WIDGET_CLICK_CALLBACK_INTENT:
+            case SimStatsConstants.WIDGET_CLICK_CALLBACK_INTENT:
                 // Update widget.
-                ZeroSimWidgetProvider.updateWidget(context.getApplicationContext());
+                SimStatsWidgetProvider.updateWidget(context.getApplicationContext());
                 break;
 
             default:

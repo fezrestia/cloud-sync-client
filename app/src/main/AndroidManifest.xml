@@ -23,7 +23,7 @@
     >
 
         <activity
-                android:name=".RootActivity"
+            android:name=".RootActivity"
         >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -32,8 +32,9 @@
         </activity>
 
         <activity
-            android:name=".zerosim.ZeroSimSettingActivity"
-            >
+            android:name=".simstats.SimStatsSettingActivity"
+            android:exported="false"
+        >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
@@ -59,26 +60,26 @@
 
         <!-- 0 SIM -->
         <service
-                android:name=".zerosim.ZeroSimJobSchedulerService"
+                android:name=".simstats.SimStatsJobSchedulerService"
                 android:permission="android.permission.BIND_JOB_SERVICE"
                 android:exported="true"
         />
         <receiver
-                android:name=".zerosim.ZeroSimWidgetProvider"
+                android:name=".simstats.SimStatsWidgetProvider"
         >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                     android:name="android.appwidget.provider"
-                    android:resource="@xml/zerosim_widget"
+                    android:resource="@xml/simstats_widget"
             />
         </receiver>
         <receiver
-                android:name=".zerosim.ZeroSimWidgetReceiver"
+                android:name=".simstats.SimStatsWidgetReceiver"
         >
             <intent-filter>
-                <action android:name="com.fezrestia.android.cloudsyncclient.zerosim.ACTION_ON_WIDGET_CLICKED" />
+                <action android:name="com.fezrestia.android.cloudsyncclient.simstats.ACTION_ON_WIDGET_CLICKED" />
             </intent-filter>
         </receiver>
 
