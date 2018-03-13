@@ -70,12 +70,21 @@ public class SimStatsJobSchedulerService extends JobService {
             mParams = params;
         }
 
+        @SuppressWarnings("UnusedAssignment")
         @Override
         public void run() {
             if (IS_DEBUG) Log.logDebug(TAG, "NotifyThread.run() : E");
 
-            String response = submitGetRequest(SimStatsConstants.SIM_STATS_NOTIFY_GET_URL_ZEROSIM);
-            if (IS_DEBUG) Log.logDebug(TAG, "response = " + response);
+            String response;
+
+            response = submitGetRequest(SimStatsConstants.SIM_STATS_NOTIFY_GET_URL_DCM);
+            if (IS_DEBUG) Log.logDebug(TAG, "DCM response = " + response);
+
+            response = submitGetRequest(SimStatsConstants.SIM_STATS_NOTIFY_GET_URL_NURO);
+            if (IS_DEBUG) Log.logDebug(TAG, "NURO response = " + response);
+
+            response = submitGetRequest(SimStatsConstants.SIM_STATS_NOTIFY_GET_URL_ZEROSIM);
+            if (IS_DEBUG) Log.logDebug(TAG, "ZEROSIM response = " + response);
 
             jobFinished(mParams, false); // Not reschedule.
 
@@ -93,12 +102,21 @@ public class SimStatsJobSchedulerService extends JobService {
             mParams = params;
         }
 
+        @SuppressWarnings("UnusedAssignment")
         @Override
         public void run() {
             if (IS_DEBUG) Log.logDebug(TAG, "SyncThread.run() : E");
 
-            String response = submitGetRequest(SimStatsConstants.SIM_STATS_SYNC_GET_URL_ZEROSIM);
-            if (IS_DEBUG) Log.logDebug(TAG, "response = " + response);
+            String response;
+
+            response = submitGetRequest(SimStatsConstants.SIM_STATS_SYNC_GET_URL_DCM);
+            if (IS_DEBUG) Log.logDebug(TAG, "DCM response = " + response);
+
+            response = submitGetRequest(SimStatsConstants.SIM_STATS_SYNC_GET_URL_NURO);
+            if (IS_DEBUG) Log.logDebug(TAG, "NURO response = " + response);
+
+            response = submitGetRequest(SimStatsConstants.SIM_STATS_SYNC_GET_URL_ZEROSIM);
+            if (IS_DEBUG) Log.logDebug(TAG, "ZEROSIM response = " + response);
 
             jobFinished(mParams, false); // Not reschedule.
 

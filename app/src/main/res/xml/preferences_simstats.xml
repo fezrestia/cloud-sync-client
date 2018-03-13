@@ -1,15 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
 >
     <PreferenceCategory
-            android:title="SIM Stats"
+        android:title="SIM Stats"
     >
         <CheckBoxPreference
             android:key="is_simstats_cron_enabled"
             android:title="Enable SIM Stats Cron"
             android:summary="En/Disable SIM stats cron job."
+        />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="REST APIs (DCM)"
+        >
+        <Preference
+            android:key="request_dcm_sync"
+            android:title="Sync"
+            />
+        <Preference
+            android:key="request_dcm_notify"
+            android:title="Notify"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="REST APIs (NURO)"
+        >
+        <Preference
+            android:key="request_nuro_sync"
+            android:title="Sync"
+            />
+        <Preference
+            android:key="request_nuro_notify"
+            android:title="Notify"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="REST APIs (ZEROSIM)"
+    >
+        <Preference
+            android:key="request_zerosim_sync"
+            android:title="Sync"
+        />
+        <Preference
+            android:key="request_zerosim_notify"
+            android:title="Notify"
         />
     </PreferenceCategory>
 
