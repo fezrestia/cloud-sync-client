@@ -33,7 +33,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="10sp"
                 android:text="xxx / 20 GB"
-                android:textAlignment="center"
+                android:textAlignment="viewEnd"
                 android:maxLines="1"
                 android:background="@drawable/simple_frame"
             />
@@ -68,7 +68,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="10sp"
                 android:text="xxx / 2000 MB"
-                android:textAlignment="center"
+                android:textAlignment="viewEnd"
                 android:maxLines="1"
                 android:background="@drawable/simple_frame"
             />
@@ -103,7 +103,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="10sp"
                 android:text="xxx / 500 MB"
-                android:textAlignment="center"
+                android:textAlignment="viewEnd"
                 android:maxLines="1"
                 android:background="@drawable/simple_frame"
             />

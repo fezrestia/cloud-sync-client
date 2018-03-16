@@ -77,8 +77,9 @@ public class SimStatsWidgetProvider extends AppWidgetProvider {
 
     private static String getDataString(float curUsed) {
         String text = "";
-        if (curUsed != -1.0f) {
-            text = text + curUsed + " MB";
+        if (curUsed != SimStatsConstants.INVALID_USED_AMOUNT) {
+            int used = (int) curUsed;
+            text = text + used + " MB  ";
         } else {
             text = "NO DATA";
         }
