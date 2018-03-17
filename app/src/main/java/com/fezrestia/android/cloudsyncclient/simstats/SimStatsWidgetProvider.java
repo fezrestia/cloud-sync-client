@@ -47,13 +47,13 @@ public class SimStatsWidgetProvider extends AppWidgetProvider {
         // Get current value.
         float curUsedSimStats = RootApplication.getGlobalSharedPreferences(context).getFloat(
                 SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_ZEROSIM,
-                -1.0f); // Default value.
+                SimStatsConstants.INVALID_USED_AMOUNT); // Default value.
         float curUsedNuro = RootApplication.getGlobalSharedPreferences(context).getFloat(
                 SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_NURO,
-                -1.0f); // Default value.
+                SimStatsConstants.INVALID_USED_AMOUNT); // Default value.
         float curUsedDcm = RootApplication.getGlobalSharedPreferences(context).getFloat(
                 SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_DCM,
-                -1.0f); // Default value.
+                SimStatsConstants.INVALID_USED_AMOUNT); // Default value.
 
         // Text.
         String simstats_text = getDataString(curUsedSimStats);
