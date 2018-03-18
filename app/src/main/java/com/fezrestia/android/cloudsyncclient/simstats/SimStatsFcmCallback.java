@@ -67,11 +67,13 @@ public class SimStatsFcmCallback implements FcmMessagingService.Callback {
         if (remoteVal != null) {
             localVal = Float.parseFloat(remoteVal);
 
-            // Store.
-            RootApplication.getGlobalSharedPreferences(RootApplication.getContext()).edit().putFloat(
-                    localKey,
-                    localVal)
-                    .apply();
+            if (0 < localVal) {
+                // Store.
+                RootApplication.getGlobalSharedPreferences(RootApplication.getContext()).edit().putFloat(
+                        localKey,
+                        localVal)
+                        .apply();
+            }
 
             if (IS_DEBUG) Log.logDebug(TAG, "key=" + localKey + " = " + localVal);
         }
