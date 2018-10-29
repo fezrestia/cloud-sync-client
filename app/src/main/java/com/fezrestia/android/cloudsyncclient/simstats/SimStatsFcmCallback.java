@@ -36,15 +36,18 @@ public class SimStatsFcmCallback implements FcmMessagingService.Callback {
         float zerosimUsed = storeRemoteToLocal(
                 msg,
                 SimStatsConstants.KEY_SIM_STATS_MONTH_USED_MB_NOTIFY_ZEROSIM,
-                SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_ZEROSIM);
+                SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_ZEROSIM,
+                SimStatsConstants.SP_KEY_SIM_STATS_LAST_UPDATED_TIMESTAMP_ZEROSIM);
         storeRemoteToLocal(
                 msg,
                 SimStatsConstants.KEY_SIM_STATS_MONTH_USED_MB_NOTIFY_NURO,
-                SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_NURO);
+                SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_NURO,
+                SimStatsConstants.SP_KEY_SIM_STATS_LAST_UPDATED_TIMESTAMP_NURO);
         storeRemoteToLocal(
                 msg,
                 SimStatsConstants.KEY_SIM_STATS_MONTH_USED_MB_NOTIFY_DCM,
-                SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_DCM);
+                SimStatsConstants.SP_KEY_CURRENT_MONTH_USED_DCM,
+                SimStatsConstants.SP_KEY_SIM_STATS_LAST_UPDATED_TIMESTAMP_DCM);
 
         // Update widget.
         SimStatsWidgetProvider.updateWidget(RootApplication.getContext());
@@ -59,7 +62,11 @@ public class SimStatsFcmCallback implements FcmMessagingService.Callback {
         }
     }
 
-    private float storeRemoteToLocal(RemoteMessage remoteMsg, String remoteKey, String localKey) {
+    private float storeRemoteToLocal(
+            RemoteMessage remoteMsg,
+            String remoteKey,
+            String localKey,
+            String timestampKey) {
         Map<String, String> data = remoteMsg.getData();
 
         String remoteVal = data.get(remoteKey);
@@ -72,6 +79,12 @@ public class SimStatsFcmCallback implements FcmMessagingService.Callback {
                 RootApplication.getGlobalSharedPreferences(RootApplication.getContext()).edit().putFloat(
                         localKey,
                         localVal)
+                        .apply();
+
+                // Last updated timestamp.
+                RootApplication.getGlobalSharedPreferences(RootApplication.getContext()).edit().putLong(
+                        timestampKey,
+                        System.currentTimeMillis())
                         .apply();
             }
 

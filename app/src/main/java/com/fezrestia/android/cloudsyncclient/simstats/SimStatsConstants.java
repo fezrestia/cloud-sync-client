@@ -12,6 +12,14 @@ public class SimStatsConstants {
     static final String SP_KEY_CURRENT_MONTH_USED_DCM
             = "key-sim-stats-current-month-used-dcm";
 
+    // Timestamp definitions.
+    static final String SP_KEY_SIM_STATS_LAST_UPDATED_TIMESTAMP_ZEROSIM =
+            "key-zerosim-last-updated-timestamp";
+    static final String SP_KEY_SIM_STATS_LAST_UPDATED_TIMESTAMP_NURO =
+            "key-nuro-last-updated-timestamp";
+    static final String SP_KEY_SIM_STATS_LAST_UPDATED_TIMESTAMP_DCM =
+            "dcm-last-updated-timestamp";
+
     static final float INVALID_USED_AMOUNT = -1.0f;
 
     static final float MONTH_USED_MB_LIMIT_ZEROSIM = 5000.0f;
@@ -22,6 +30,9 @@ public class SimStatsConstants {
 
     static final float MONTH_USED_MB_WARNING_ZEROSIM =
             MONTH_USED_MB_LIMIT_ZEROSIM - MONTH_USED_MB_CLEARANCE;
+
+    // Timestamp.
+    static final long TIMESTAMP_DIFF_THRESHOLD_MILLIS = 24 * 60 * 60 * 1000; // 24 hour.
 
     // Notify API.
     public static final String SIM_STATS_NOTIFY_GET_URL_ZEROSIM =
