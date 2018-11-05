@@ -3,15 +3,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
 >
-    <PreferenceCategory
-        android:title="SIM Stats"
-    >
-        <CheckBoxPreference
-            android:key="is_simstats_cron_enabled"
-            android:title="Enable SIM Stats Cron"
-            android:summary="En/Disable SIM stats cron job."
-        />
-    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="REST APIs (DCM)"

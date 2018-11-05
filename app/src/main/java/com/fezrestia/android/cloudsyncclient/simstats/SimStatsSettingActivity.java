@@ -1,13 +1,8 @@
 package com.fezrestia.android.cloudsyncclient.simstats;
 
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 
@@ -38,10 +33,6 @@ public class SimStatsSettingActivity extends PreferenceActivity {
         }
 
         private void setCallbacks() {
-            // En/Disable.
-            findPreference("is_simstats_cron_enabled").setOnPreferenceChangeListener(
-                    new SimStatsEnabledChangeListener());
-
             // DCM.
             findPreference("request_dcm_sync").setOnPreferenceClickListener(preference -> {
                 requestRest(SimStatsConstants.SIM_STATS_SYNC_GET_URL_DCM);
@@ -76,70 +67,6 @@ public class SimStatsSettingActivity extends PreferenceActivity {
         private void requestRest(String uri) {
             Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
             startActivity(browser);
-        }
-
-        private class SimStatsEnabledChangeListener
-                implements Preference.OnPreferenceChangeListener {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object value) {
-                if (IS_DEBUG) Log.logDebug(TAG, "onPreferenceChange()");
-
-                Boolean enabled = (Boolean) value;
-                if (IS_DEBUG) Log.logDebug(TAG, "    Change to : " + enabled);
-
-                // Job scheduler service.
-                JobScheduler scheduler = (JobScheduler)
-                        getContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
-                if (scheduler == null) throw new RuntimeException("scheduler is null.");
-
-                if (enabled) {
-                    // Enabled.
-
-                    ComponentName serviceName = new ComponentName(
-                            getContext().getPackageName(),
-                            SimStatsJobSchedulerService.class.getName());
-
-                    JobInfo notifyJobInfo = getPeriodicJobInfo(
-                            JOB_ID_NOTIFY,
-                            serviceName,
-                            2 * 60 * 60 * 1000); // 2 hours
-
-                    JobInfo syncJobInfo = getPeriodicJobInfo(
-                            JOB_ID_SYNC,
-                            serviceName,
-                            6 * 60 * 60 * 1000); // 6 hours
-
-                    scheduler.schedule(notifyJobInfo);
-                    scheduler.schedule(syncJobInfo);
-
-                } else {
-                    // Disabled.
-
-                    scheduler.cancel(JOB_ID_NOTIFY);
-                    scheduler.cancel(JOB_ID_SYNC);
-                }
-
-                return true;
-            }
-        }
-
-        /**
-         * Get periodic JobInfo.
-         *
-         * @param jobId Job ID
-         * @param service Job scheduler service.
-         * @param intervalMillis Interval time.
-         * @return JobInfo.
-         */
-        private JobInfo getPeriodicJobInfo(int jobId, ComponentName service,  int intervalMillis) {
-            return new JobInfo.Builder(jobId, service)
-                    .setBackoffCriteria(60 * 1000, JobInfo.BACKOFF_POLICY_LINEAR) // 60 sec
-                    .setPeriodic(intervalMillis)
-                    .setPersisted(true) // Auto register after reboot.
-                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY) // All network.
-                    .setRequiresCharging(false) // Run always.
-                    .setRequiresDeviceIdle(false) // Run always.
-                    .build();
         }
     }
 

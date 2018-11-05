@@ -22,6 +22,9 @@ public class SimStatsWidgetReceiver extends BroadcastReceiver {
 
         String action = intent.getAction();
         if (IS_DEBUG) Log.logDebug(TAG, "    ACTION = " + action);
+        if (action == null) {
+            return;
+        }
 
         switch (action) {
             case SimStatsConstants.WIDGET_CLICK_CALLBACK_INTENT:

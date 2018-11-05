@@ -22,7 +22,7 @@ public class SimStatsConstants {
 
     static final float INVALID_USED_AMOUNT = -1.0f;
 
-    static final float MONTH_USED_MB_LIMIT_ZEROSIM = 5000.0f;
+    static final float MONTH_USED_MB_LIMIT_ZEROSIM = 500.0f;
     static final float MONTH_USED_MB_LIMIT_NURO = 2000.0f;
     static final float MONTH_USED_MB_LIMIT_DCM = 20000.0f;
 
