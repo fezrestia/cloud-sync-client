@@ -26,15 +26,8 @@ public class SimStatsWidgetReceiver extends BroadcastReceiver {
             return;
         }
 
-        switch (action) {
-            case SimStatsConstants.WIDGET_CLICK_CALLBACK_INTENT:
-                // Update widget.
-                SimStatsWidgetProvider.updateWidget(context.getApplicationContext());
-                break;
-
-            default:
-                if (IS_DEBUG) Log.logDebug(TAG, "Unexpected Intent Action.");
-                break;
+        if (SimStatsConstants.WIDGET_CLICK_CALLBACK_INTENT.equals(action)) {
+            SimStatsWidgetProvider.requestUpdate(context.getApplicationContext());
         }
     }
 }

@@ -11,10 +11,6 @@
             android:key="request_dcm_sync"
             android:title="Sync"
             />
-        <Preference
-            android:key="request_dcm_notify"
-            android:title="Notify"
-            />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -24,10 +20,6 @@
             android:key="request_nuro_sync"
             android:title="Sync"
             />
-        <Preference
-            android:key="request_nuro_notify"
-            android:title="Notify"
-            />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -36,10 +28,6 @@
         <Preference
             android:key="request_zerosim_sync"
             android:title="Sync"
-        />
-        <Preference
-            android:key="request_zerosim_notify"
-            android:title="Notify"
         />
     </PreferenceCategory>
 

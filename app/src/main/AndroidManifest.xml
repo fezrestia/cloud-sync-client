@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <manifest
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        package="com.fezrestia.android.cloudsyncclient"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.fezrestia.android.cloudsyncclient"
+
+    android:versionCode="42"
+    android:versionName="2.0.0-42"
 >
+<!--                     | | | |-> incremental build count
+                             | | |-> patch
+                             | |-> minor
+                             |-> major
+    -->
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,9 +25,10 @@
                      tools:ignore="ProtectedPermissions"/>
 
     <application
-        android:name=".RootApplication"
+        android:name=".App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_label"
+        android:theme="@style/Theme.AppCompat"
         android:supportsRtl="true"
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -43,25 +52,6 @@
             </intent-filter>
         </activity>
 
-
-
-        <!-- Firebase -->
-        <service
-                android:name=".firebase.FcmMessagingService"
-        >
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <service
-                android:name=".firebase.FcmInstanceIdService"
-        >
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
-
-        <!-- SIM Stats -->
         <receiver
                 android:name=".simstats.SimStatsWidgetProvider"
         >
@@ -75,7 +65,7 @@
         </receiver>
         <receiver
                 android:name=".simstats.SimStatsWidgetReceiver"
-        >
+                tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="com.fezrestia.android.cloudsyncclient.simstats.ACTION_ON_WIDGET_CLICKED" />
             </intent-filter>

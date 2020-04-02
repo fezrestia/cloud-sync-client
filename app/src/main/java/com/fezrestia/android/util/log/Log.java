@@ -9,8 +9,8 @@ public class Log {
     /**
      * Debug log.
      *
-     * @param tag
-     * @param event
+     * @param tag Log tag.
+     * @param event Log message.
      */
     public static void logDebug(String tag, String event) {
         log("DEBUG", tag, event);
@@ -19,19 +19,19 @@ public class Log {
     /**
      * Error log.
      *
-     * @param tag
-     * @param event
+     * @param tag Log tag.
+     * @param event Log message.
      */
     public static void logError(String tag, String event) {
         log("ERROR", tag, event);
     }
 
     private static void log(String globalTag, String localTag, String event) {
-        StringBuilder builder = new StringBuilder().append("[").append(globalTag).append("] ")
-                .append("[TIME = ").append(SystemClock.uptimeMillis()).append("] ")
-                .append("[").append(localTag).append("]")
-                .append("[").append(Thread.currentThread().getName()).append("] ")
-                .append(": ").append(event);
-        android.util.Log.e("TraceLog", builder.toString());
+        String builder = "[" + globalTag + "] " +
+                "[TIME = " + SystemClock.uptimeMillis() + "] " +
+                "[" + localTag + "]" +
+                "[" + Thread.currentThread().getName() + "] " +
+                ": " + event;
+        android.util.Log.e("TraceLog", builder);
     }
 }

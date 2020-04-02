@@ -8,7 +8,6 @@ import android.widget.Button;
 
 import com.fezrestia.android.cloudsyncclient.simstats.SimStatsSettingActivity;
 import com.fezrestia.android.util.log.Log;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 public class RootActivity extends Activity {
     // Log tag.
@@ -35,9 +34,7 @@ public class RootActivity extends Activity {
         if (IS_DEBUG) Log.logDebug(TAG, "onResume() : E");
         super.onResume();
 
-        // Firebase cloud messaging token.
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        if (IS_DEBUG) Log.logDebug(TAG, "getToken() : Token=" + refreshedToken);
+        // NOP.
 
         if (IS_DEBUG) Log.logDebug(TAG, "onResume() : X");
     }

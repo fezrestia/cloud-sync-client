@@ -1,64 +1,31 @@
 package com.fezrestia.android.cloudsyncclient.simstats;
 
-public class SimStatsConstants {
+class SimStatsConstants {
 
     static final String WIDGET_CLICK_CALLBACK_INTENT
             = "com.fezrestia.android.cloudsyncclient.simstats.ACTION_ON_WIDGET_CLICKED";
 
-    static final String SP_KEY_CURRENT_MONTH_USED_ZEROSIM
-            = "key-sim-stats-current-month-used-zerosim";
-    static final String SP_KEY_CURRENT_MONTH_USED_NURO
-            = "key-sim-stats-current-month-used-nuro";
-    static final String SP_KEY_CURRENT_MONTH_USED_DCM
-            = "key-sim-stats-current-month-used-dcm";
-
     // Timestamp definitions.
-    static final String SP_KEY_SIM_STATS_LAST_UPDATED_TIMESTAMP_ZEROSIM =
-            "key-zerosim-last-updated-timestamp";
-    static final String SP_KEY_SIM_STATS_LAST_UPDATED_TIMESTAMP_NURO =
-            "key-nuro-last-updated-timestamp";
-    static final String SP_KEY_SIM_STATS_LAST_UPDATED_TIMESTAMP_DCM =
-            "dcm-last-updated-timestamp";
-
-    static final float INVALID_USED_AMOUNT = -1.0f;
-
-    static final float MONTH_USED_MB_LIMIT_ZEROSIM = 500.0f;
-    static final float MONTH_USED_MB_LIMIT_NURO = 2000.0f;
-    static final float MONTH_USED_MB_LIMIT_DCM = 20000.0f;
-
-    static final float MONTH_USED_MB_CLEARANCE = 50.0f;
-
-    static final float MONTH_USED_MB_WARNING_ZEROSIM =
-            MONTH_USED_MB_LIMIT_ZEROSIM - MONTH_USED_MB_CLEARANCE;
+    static final String SP_KEY_SIM_STATS_LAST_UPDATED_TIMESTAMP
+            = "key-sim-stats-last-updated-timestamp";
 
     // Timestamp.
     static final long TIMESTAMP_DIFF_THRESHOLD_MILLIS = 24 * 60 * 60 * 1000; // 24 hour.
 
-    // Notify API.
-    public static final String SIM_STATS_NOTIFY_GET_URL_ZEROSIM =
-            "https://cloud-sync-service.herokuapp.com/zero_sim_stats/api/notify";
-    public static final String SIM_STATS_NOTIFY_GET_URL_NURO =
-            "https://cloud-sync-service.herokuapp.com/nuro_sim_stats/api/notify";
-    public static final String SIM_STATS_NOTIFY_GET_URL_DCM =
-            "https://cloud-sync-service.herokuapp.com/dcm_sim_stats/api/notify";
+    // Get latest SIM stats web API.
+    static final String REST_GET_LATEST_SIM_STATS
+            = "https://asia-northeast1-cloud-sync-functions.cloudfunctions.net/httpsGetLatestSimStats";
 
-    // Sync request API.
-    public static final String SIM_STATS_SYNC_GET_URL_ZEROSIM =
-            "https://cloud-sync-service.herokuapp.com/zero_sim_stats/api/sync";
-    public static final String SIM_STATS_SYNC_GET_URL_NURO =
-            "https://cloud-sync-service.herokuapp.com/nuro_sim_stats/api/sync";
-    public static final String SIM_STATS_SYNC_GET_URL_DCM =
-            "https://cloud-sync-service.herokuapp.com/dcm_sim_stats/api/sync";
+    // Update DCM stats.
+    static final String REST_GET_UPDATE_DCM_STATS
+            = "https://asia-northeast1-cloud-sync-functions.cloudfunctions.net/httpsUpdateDcmStats";
 
-    // Protocol definitions.
-    static final String KEY_SIM_STATS_MONTH_USED_MB_NOTIFY_ZEROSIM =
-            "zerosim_month_used_current_mb";
-    static final String KEY_SIM_STATS_MONTH_USED_MB_NOTIFY_NURO =
-            "nuro_month_used_current_mb";
-    static final String KEY_SIM_STATS_MONTH_USED_MB_NOTIFY_DCM =
-            "dcm_month_used_current_mb";
+    // Update NURO stats.
+    static final String REST_GET_UPDATE_NURO_STATS
+            = "https://asia-northeast1-cloud-sync-functions.cloudfunctions.net/httpsUpdateNuroStats";
 
-    // FCM message callback register key.
-    public static final String SIM_STATS_FCM_CALLBACK_REG_KEY = "sim-stats";
+    // Update Zero SIM stats.
+    static final String REST_GET_UPDATE_ZERO_SIM_STATS
+            = "https://asia-northeast1-cloud-sync-functions.cloudfunctions.net/httpsUpdateZeroSimStats";
 
 }
