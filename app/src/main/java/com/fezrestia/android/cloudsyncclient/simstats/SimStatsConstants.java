@@ -14,18 +14,18 @@ class SimStatsConstants {
 
     // Get latest SIM stats web API.
     static final String REST_GET_LATEST_SIM_STATS
-            = "https://asia-northeast1-cloud-sync-functions.cloudfunctions.net/httpsGetLatestSimStats";
+            = "https://asia-northeast1-cloud-sync-service.cloudfunctions.net/httpsGetLatestSimStats";
 
     // Update DCM stats.
     static final String REST_GET_UPDATE_DCM_STATS
-            = "https://asia-northeast1-cloud-sync-functions.cloudfunctions.net/httpsUpdateDcmStats";
+            = "https://asia-northeast1-cloud-sync-service.cloudfunctions.net/httpsUpdateDcmStats";
 
     // Update NURO stats.
     static final String REST_GET_UPDATE_NURO_STATS
-            = "https://asia-northeast1-cloud-sync-functions.cloudfunctions.net/httpsUpdateNuroStats";
+            = "https://asia-northeast1-cloud-sync-service.cloudfunctions.net/httpsUpdateNuroStats";
 
     // Update Zero SIM stats.
     static final String REST_GET_UPDATE_ZERO_SIM_STATS
-            = "https://asia-northeast1-cloud-sync-functions.cloudfunctions.net/httpsUpdateZeroSimStats";
+            = "https://asia-northeast1-cloud-sync-service.cloudfunctions.net/httpsUpdateZeroSimStats";
 
 }
