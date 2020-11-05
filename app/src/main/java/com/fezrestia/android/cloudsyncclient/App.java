@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 
 import com.fezrestia.android.util.log.Log;
@@ -16,7 +17,7 @@ public class App extends Application {
     public static final boolean IS_DEBUG = false || Log.IS_DEBUG;
 
     // Total UI thread handler.
-    public static Handler ui = new Handler();
+    public static final Handler ui = new Handler(Looper.getMainLooper());
 
     // Global SharedPreferences.
     private static SharedPreferences mGlobalSharedPreferences = null;
