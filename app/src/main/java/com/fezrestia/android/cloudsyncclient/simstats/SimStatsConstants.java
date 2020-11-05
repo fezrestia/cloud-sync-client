@@ -24,8 +24,4 @@ class SimStatsConstants {
     static final String REST_GET_UPDATE_NURO_STATS
             = "https://asia-northeast1-cloud-sync-service.cloudfunctions.net/httpsUpdateNuroStats";
 
-    // Update Zero SIM stats.
-    static final String REST_GET_UPDATE_ZERO_SIM_STATS
-            = "https://asia-northeast1-cloud-sync-service.cloudfunctions.net/httpsUpdateZeroSimStats";
-
 }

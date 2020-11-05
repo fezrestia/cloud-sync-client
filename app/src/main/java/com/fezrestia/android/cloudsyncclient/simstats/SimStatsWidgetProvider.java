@@ -140,13 +140,11 @@ public class SimStatsWidgetProvider extends AppWidgetProvider {
                     JSONObject latestStats = new JSONObject(res);
                     final int dcmMonthUsed = latestStats.getInt("month_used_dcm");
                     final int nuroMonthUsed = latestStats.getInt("month_used_nuro");
-                    final int zeroSimMonthUsed = latestStats.getInt("month_used_zero_sim");
 
                     App.ui.post(new UpdateWidgetTask(
                             context,
                             dcmMonthUsed,
-                            nuroMonthUsed,
-                            zeroSimMonthUsed));
+                            nuroMonthUsed));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -161,7 +159,6 @@ public class SimStatsWidgetProvider extends AppWidgetProvider {
 
         private final int dcmMonthUsed;
         private final int nuroMonthUsed;
-        private final int zeroSimMonthUsed;
 
         /**
          * CONSTRUCTOR.
@@ -169,12 +166,10 @@ public class SimStatsWidgetProvider extends AppWidgetProvider {
         UpdateWidgetTask(
                 Context context,
                 int dcmMonthUsed,
-                int nuroMonthUsed,
-                int zeroSimMonthUsed) {
+                int nuroMonthUsed) {
             this.context = context;
             this.dcmMonthUsed = dcmMonthUsed;
             this.nuroMonthUsed = nuroMonthUsed;
-            this.zeroSimMonthUsed = zeroSimMonthUsed;
         }
 
         @Override
@@ -186,11 +181,9 @@ public class SimStatsWidgetProvider extends AppWidgetProvider {
 
             String dcmText = getDataString(dcmMonthUsed);
             String nuroText = getDataString(nuroMonthUsed);
-            String zeroSimText = getDataString(zeroSimMonthUsed);
 
             remoteViews.setTextViewText(R.id.simstats_widget_dcm_used, dcmText);
             remoteViews.setTextViewText(R.id.simstats_widget_nuro_used, nuroText);
-            remoteViews.setTextViewText(R.id.simstats_widget_zerosim_used, zeroSimText);
 
             // Get last updated timestamp.
             long lastUpdatedMillis = App.sp(context).getLong(
@@ -203,9 +196,8 @@ public class SimStatsWidgetProvider extends AppWidgetProvider {
             // Error indicator.
             if (isDataOldError) {
                 int errorColor = 0x00FF0000;
-                remoteViews.setTextColor(R.id.simstats_widget_zerosim_used, errorColor);
-                remoteViews.setTextColor(R.id.simstats_widget_nuro_used, errorColor);
                 remoteViews.setTextColor(R.id.simstats_widget_dcm_used, errorColor);
+                remoteViews.setTextColor(R.id.simstats_widget_nuro_used, errorColor);
             }
 
             // Click event.

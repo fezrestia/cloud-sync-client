@@ -1,112 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/simstats_widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
 >
     <!-- DCM -->
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-    >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerVertical="true"
-        >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textSize="8sp"
-                android:text="DCM 4G LTE"
-                android:textAlignment="viewStart"
-                android:maxLines="1"
-            />
-            <TextView
-                android:id="@+id/simstats_widget_dcm_used"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textSize="10sp"
-                android:text="xxx / 20 GB"
-                android:textAlignment="viewEnd"
-                android:maxLines="1"
-                android:background="@drawable/simple_frame"
-            />
-        </LinearLayout>
-    </RelativeLayout>
+        android:textColor="#FFFFFF"
+        android:textSize="8sp"
+        android:text="@string/simstats_widget_label_dcm"
+        android:textAlignment="viewStart"
+        android:maxLines="1"
+        tools:ignore="SmallSp"
+    />
+    <TextView
+        android:id="@+id/simstats_widget_dcm_used"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:text="@string/simstats_widget_default_value_dcm"
+        android:textAlignment="viewEnd"
+        android:maxLines="1"
+        android:background="@drawable/simple_frame"
+        tools:ignore="SmallSp"
+    />
 
     <!-- Nuromobile -->
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-    >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerVertical="true"
-        >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textSize="8sp"
-                android:text="NUROMOBILE"
-                android:textAlignment="viewStart"
-                android:maxLines="1"
-            />
-            <TextView
-                android:id="@+id/simstats_widget_nuro_used"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textSize="10sp"
-                android:text="xxx / 2000 MB"
-                android:textAlignment="viewEnd"
-                android:maxLines="1"
-                android:background="@drawable/simple_frame"
-            />
-        </LinearLayout>
-    </RelativeLayout>
+        android:textColor="#FFFFFF"
+        android:textSize="8sp"
+        android:text="@string/simstats_widget_label_nuro"
+        android:textAlignment="viewStart"
+        android:maxLines="1"
+        tools:ignore="SmallSp"
+    />
+    <TextView
+        android:id="@+id/simstats_widget_nuro_used"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:text="@string/simstats_widget_default_value_nuro"
+        android:textAlignment="viewEnd"
+        android:maxLines="1"
+        android:background="@drawable/simple_frame"
+        tools:ignore="SmallSp"
+    />
 
-    <!-- Zero SIM -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-    >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerVertical="true"
-        >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textSize="8sp"
-                android:text="ZERO SIM"
-                android:textAlignment="viewStart"
-                android:maxLines="1"
-            />
-            <TextView
-                android:id="@+id/simstats_widget_zerosim_used"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textSize="10sp"
-                android:text="xxx / 500 MB"
-                android:textAlignment="viewEnd"
-                android:maxLines="1"
-                android:background="@drawable/simple_frame"
-            />
-        </LinearLayout>
-    </RelativeLayout>
 </LinearLayout>

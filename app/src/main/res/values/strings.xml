@@ -1,3 +1,12 @@
 <resources>
     <string name="app_label">Cloud Sync Client</string>
+
+    <string name="button_simstats_load_setting">SIM Load Stats Setting</string>
+
+    <string name="simstats_widget_label_dcm">DCM 4G LTE</string>
+    <string name="simstats_widget_label_nuro">NUROMOBILE</string>
+
+    <string name="simstats_widget_default_value_dcm">xxx / 20 GB</string>
+    <string name="simstats_widget_default_value_nuro">xxx / 2000 MB</string>
+
 </resources>

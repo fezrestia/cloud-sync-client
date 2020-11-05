@@ -22,13 +22,4 @@
             />
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="REST APIs (ZEROSIM)"
-    >
-        <Preference
-            android:key="request_zerosim_sync"
-            android:title="Sync"
-        />
-    </PreferenceCategory>
-
 </PreferenceScreen>

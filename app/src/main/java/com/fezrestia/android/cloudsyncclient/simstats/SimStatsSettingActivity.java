@@ -35,7 +35,6 @@ public class SimStatsSettingActivity extends AppCompatActivity {
 
         }
 
-        @SuppressWarnings("ConstantConditions")
         private void setCallbacks() {
             // DCM.
             findPreference("request_dcm_sync").setOnPreferenceClickListener(preference -> {
@@ -46,12 +45,6 @@ public class SimStatsSettingActivity extends AppCompatActivity {
             // NURO.
             findPreference("request_nuro_sync").setOnPreferenceClickListener(preference -> {
                 requestRest(SimStatsConstants.REST_GET_UPDATE_NURO_STATS);
-                return false;
-            });
-
-            // ZEROSIM.
-            findPreference("request_zerosim_sync").setOnPreferenceClickListener(preference -> {
-                requestRest(SimStatsConstants.REST_GET_UPDATE_ZERO_SIM_STATS);
                 return false;
             });
         }
