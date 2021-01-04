@@ -2,8 +2,8 @@
 
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
         android:initialLayout="@layout/simstats_widget_layout"
-        android:minHeight="48dp"
-        android:minWidth="48dp"
+        android:minHeight="30dp"
+        android:minWidth="30dp"
         android:updatePeriodMillis="3600000"
 >
 </appwidget-provider>
