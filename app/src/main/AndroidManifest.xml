@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.fezrestia.android.cloudsyncclient"
 
-    android:versionCode="74"
-    android:versionName="2.3.1-74"
+    android:versionCode="81"
+    android:versionName="2.3.2-81"
 >
 <!--                     | | | |-> incremental build count
                              | | |-> patch
